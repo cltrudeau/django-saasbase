@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block container %}
+<div class="container" style="max-width: 576px">
+<div class="align-self-center">
+  {% if form.errors %}
+    <div class="alert alert-danger">
+      Username and password don't match, please try again.
+    </div>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <div class="alert alert-warning">
+        Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.
+      </div>
+    {% else %}
+      <div class="alert alert-primary">
+        Login to see this page.
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+
+
+
+
+    <div class="form-group">
+      <label for="id_username">{{ form.username.label_tag }}</label>
+      <input id="id_username" name="username" autofocus="" required=""
+        type="email" class="form-control" placeholder="Enter email" 
+        {% if form.username.value %}
+          value="{{ form.username.value }}" {% endif %}>
+    </div>
+
+
+    <div class="form-group">
+      <label for="id_password">{{ form.password.label_tag }}</label>
+      <input id="id_password" name="password" required="" type="password"
+        class="form-control" placeholder="Password"
+        {% if form.password.value %}
+          value="{{ form.password.value }}" {% endif %}>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary" value="login">Login</button>
+    <input type="hidden" name="next" value="{{ next }}">
+
+  </form>
+
+  <p style="padding-top:5px">
+    <a href="{% url 'password_reset' %}">Lost password?</a>
+  </p>
+
+</div>
+</div>
+{% endblock container %}
