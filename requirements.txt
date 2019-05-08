@@ -1,0 +1,11 @@
+# These requirements are for running tests and the sample_site, library itself
+# only needs a subset, see setup.py for that list
+coverage==4.5.3
+Django==2.2.1
+django-awl==0.23.1
+django-localflavor==2.2
+pyflakes==2.1.1
+Sphinx==2.0.1
+sphinx-rtd-theme==0.4.3
+tox==3.9.0
+twine==1.13.0
